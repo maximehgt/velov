@@ -1,0 +1,484 @@
+/*style.css
+Vélo'V
+Maxime HUGONNET */
+
+/* -------------------- 1- Reset CSS + BODY -------------------- */
+/* -------------------- 2- HEADER  -------------------- */
+/* -------------------- 3- Diaporama -------------------- */
+/* -------------------- 4- Maps -------------------- */
+/* -------------------- 5- Cadre Station -------------------- */
+/* -------------------- 6- Canvas -------------------- */
+/* -------------------- 7- Section Location -------------------- */
+/* -------------------- 8- Footer -------------------- */
+/* -------------------- 9- Media Queries -------------------- */
+
+/* -------------------- 1- Reset CSS + BODY -------------------- */
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    width: 100%; /* Le site occupera 100% de la largeur */
+    font-family: 'Open Sans', sans-serif; /* Définition de la police */
+    background-color: #DBDFDE;
+}
+
+/* -------------------- 2- HEADER  -------------------- */
+header
+{
+    display: flex;
+    align-items: center; /* Centre verticalement le titre */
+    justify-content: center;
+    color: black; /* Le logo et le titre*/
+    background-color: #c3c3c3;
+}
+
+header h1
+{
+    padding: 21px 0;
+    margin-left: 20px;
+    font-size: 3vh; /* Taille du titre */
+}
+
+header img
+{
+    max-height: 80px;
+}
+
+/* Texte de Bienvenue */
+#welcomeText
+{
+    padding: 15px 5px;
+    font-size: 1.15em;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* -------------------- 3- Diaporama -------------------- */
+#diaporama
+{
+    position: relative;
+    width: 40%;
+    min-width: 320px; /* Le diaporama gardera une taille minimum de 320px */
+    margin: 2% auto; /* Centre le diaporama */
+}
+
+#caroussel
+{
+    position: relative;
+    width: 85%;
+    height: 31vh; /* Une hauteur en vh permet de garder le diaporama en bonne hauteur sur chaque résolution */
+    margin: 0 auto;
+    border: 10px solid #c0c0c0;
+    border-radius: 8px;
+}
+
+#caroussel figure
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 2s;
+}
+
+#caroussel figure + figure
+{
+    opacity: 0; /* Fait disparétre toutes les images sauf la première */
+}
+
+#caroussel figure img
+{
+    width: 100%;
+    height: 100%;
+}
+
+#caroussel figcaption
+{
+    position: absolute;
+    left: 0; right: 0; /* La légende occupera toute la largeur de l'image */
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir transparent */
+    color: #fff;
+    font-size: 3vh;
+    font-weight: 600;
+    text-align: center;
+}
+
+/*-- Placement des différentes légendes sur son image --*/
+#caroussel figure:nth-child(1) figcaption
+{
+    top: 20%; /* 1Ã©re lÃ©gende */
+}
+
+#caroussel figure:nth-child(2) figcaption
+{
+    top: 30%; /* 2Ã©me lÃ©gende */
+}
+
+#caroussel figure:nth-child(3) figcaption
+{
+    top: 40%; /* 3Ã©me lÃ©gende */
+}
+
+#caroussel figure:nth-child(4) figcaption
+{
+    top: 20%; /* 4Ã©me lÃ©gende */
+}
+
+#caroussel figure:nth-child(5) figcaption
+{
+    top: 20%; /* 5Ã©me lÃ©gende */
+}
+
+#diaporama button
+{
+    position: absolute;
+    top: 45%; /* Placement des boutons au centre du diaporama */
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.8); /* Couleur de fond des boutons */
+    border: none;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#bouttonDroit
+{
+    right: -9%; /* Placement du bouton droit */
+}
+
+#bouttonGauche
+{
+    left: -9%; /* Placement du bouton gauche */
+}
+
+.chevron::before
+{
+    content: "";
+    position: relative;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0; /* 2 Bordures pour le chevron */
+	top: 0.15em;
+}
+
+.chevron.right:before
+{
+	left: -0.15em;
+	transform: rotate(45deg); /* Rotation de 45 degrÃ© */
+}
+
+.chevron.left:before
+{
+	left: 0.25em;
+	transform: rotate(-135deg); /* Rotation de -135 degrÃ© */
+}
+
+/* -------------------- 4- Maps -------------------- */
+#header
+{
+    display: flex;
+    align-items: center; /* Centre verticalement le titre */
+    justify-content: center;
+    color: black; /* Le logo et le titre*/
+    margin: 5px;
+}
+
+.header
+{
+    margin: 5px;
+}
+
+#carte
+{
+    /* Dimensions de la carte */
+    width: 100%; /* La carte prend toute la largeur */
+    max-width: 1200px; /* Elle ne dÃ©passera pas les 1200px */
+    height: 600px;
+}
+
+article
+{
+    /* Positionnement du cadre d'informations sur la station sur le cÃ´tÃ© de la carte */
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+}
+
+/* -------------------- 5- Cadre Station -------------------- */
+#infoStation
+{
+    width: 420px;
+    background-color: #45505b;
+    margin-left: 30px;
+    padding: 10px;
+    display: none; /* Le cadre sera affichÃ© en Javascript */
+}
+
+#infoStation h1
+{
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    font-size: 1.5em;
+}
+
+#listeInfo
+{
+    list-style-type: none;
+    margin: 30px 0;
+}
+
+#listeInfo li
+{
+    font-size: 0.9em;
+    font-weight: 300;
+    color: #EAF8F2;
+}
+
+#listeInfo li + li
+{
+    margin-top: 15px;
+}
+
+#listeInfo span /* Informations affichées en Javascript */
+{
+    font-size: 1em;
+    line-height: 1.5em;
+    font-weight: 600;
+    color: #66D9EF;
+}
+
+#streetView /* Cadre de la vue StreetView */
+{
+    width: 300px;
+    height: 200px;
+    margin: 10px auto;
+}
+
+#bouttonReservation /* Bouton de réservation */
+{
+    width: 130px;
+    height: 40px;
+    margin: 30px auto;
+    box-shadow: 2px 2px 3px #000;
+    border-radius: 6px;
+    transition: all 0.5s;
+}
+
+#bouttonReservation:hover
+{
+    box-shadow: -2px -2px 3px #000;
+}
+
+#bouttonReservation button
+{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#811215, #AD1E22); /* Dégrader du bouton */
+    border: none;
+    box-shadow: inset -1px -1px 10px #181717;
+    color: #EBE9E9;
+    text-shadow: 2px 2px 1px #000;
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.5s;
+}
+
+#bouttonReservation button:hover
+{
+    box-shadow: inset 1px 1px 10px #181717;
+    background-image: linear-gradient(#AD1E22, #811215); /* Dégrader du bouton */
+    color: #D6D6D6;
+    text-shadow: -2px -2px 1px #000;
+}
+
+.message
+{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 5px;
+    display: none; /* Le message sera affiché en Javascript */
+}
+
+#messageConfirmationLocation, #annulationReservation
+{
+    width: 500px;
+    margin: 20px auto;
+}
+
+/* -------------------- 6- Canvas -------------------- */
+#containerCanvas
+{
+    margin: 20px auto;
+    display: none; /* Le canvas sera affiché en Javascript */
+}
+
+#containerCanvas p
+{
+    text-align: center;
+}
+
+#signature
+{ /* Canvas */
+    display: block;
+    margin: 10px auto 5px auto;
+    border: 1px solid #000;
+    background-color: #45505b;
+    border-radius: 20px;
+}
+
+#signatureVerification
+{
+    display: none;
+}
+
+#boutonCanvas
+{
+    /* Aligne et centre les boutons "Valider" et "Effacer" du canvas */
+    display: flex;
+    justify-content: center;
+}
+
+#boutonCanvas button
+{
+    padding: 8px 15px;
+    cursor: pointer;
+    margin: 10px 0;
+    color: white;
+    font-size: 1em;
+}
+
+/* Personnalise le premier bouton du canvas */
+#boutonCanvas p:first-child button
+{
+    background-image: linear-gradient(#811215, #AD1E22);
+}
+
+#boutonCanvas p:first-child button:hover
+{
+    background-image: linear-gradient(#AD1E22, #811215);
+}
+
+#boutonCanvas p:first-child span.logoBoutonCanvas
+{
+    color: #00FF40;
+}
+
+/* Personnalise le second bouton du canvas */
+#boutonCanvas p:last-child button
+{
+    margin-left: 15px;
+    background-image: linear-gradient(#811215, #AD1E22);
+}
+
+#boutonCanvas p:last-child button:hover
+{
+    background-image: linear-gradient(#AD1E22, #811215);
+}
+
+/* -------------------- 7- Section Location -------------------- */
+#sectionLocation, #messageFinLocation
+{
+    display: none; /* Informations affichées en Javascript */
+}
+
+#messageLocation, #messageFinLocation
+{
+    text-align: center;
+    margin: 10px 0;
+}
+
+#compteur
+{ /* Compte Ã  rebours */
+    font-size: 2.2em;
+    font-weight: 800;
+    color: #AD1E22;
+    margin: 20px 0;
+}
+
+/* Boutons de la section réservation */
+#messageLocation button
+{
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+#annulation
+{ /* Bouton d'annulation du contrat de location */
+    width: 200px;
+    padding: 5px;
+    font-weight: 700;
+}
+
+#annulation:hover
+{
+    box-shadow: 0 0 10px #000;
+    background-color: red;
+}
+
+/* -------------------- 8- Footer -------------------- */
+footer
+{
+    background-color: #c3c3c3;
+}
+
+footer h6
+{
+    text-align: center;
+}
+
+/* -------------------- 9- Media Queries -------------------- */
+/* -- Tablettes -- */
+@media screen and (max-width: 979px)
+{
+    /* -- Diaporama -- */
+    #diaporama
+    {
+        width: 80%;
+    }
+}
+
+/* -- Smartphones -- */
+@media screen and (max-width: 480px)
+{
+    /* -- Maps -- */
+    #carte
+    {
+        height: 300px;
+    }
+
+    article
+    {
+        flex-direction: column; /* Place le cadre d'information de la station sous la carte */
+    }
+
+    /* -- Cadre Station -- */
+    #infoStation
+    {
+        width: 94.5%;
+        margin-left: 0;
+    }
+
+    #listeInfo
+    {
+        text-align: center;
+    }
+
+    /* -- Vue StreetView -- */
+    #streetView
+    {
+        width: 350px;
+        height: 250px;
+    }
+}

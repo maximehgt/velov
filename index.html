@@ -1,0 +1,176 @@
+<!-- index.html
+Vélo'V
+Maxime HUGONNET -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Location de Vélo'V</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Retrouvez les différentes stations de Vélo'V à Lyon, le nombre de Vélo'V disponibles, et réservez-en un." />
+    <link rel="shortcut icon" href="images/favico.ico">
+
+    <!-- Feuilles de style -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800"> <!-- Police "Open Sans"  -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Vélo'V | Réservation de Vélo'V en ligne sur Lyon" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://maxime-hugonnet.fr/openclassrooms/velov/" />
+    <meta property="og:image" content="images/imgpres.png" />
+    <meta property="og:description" content="Retrouvez les différentes stations de Vélo'V à Lyon, le nombre de Vélo'V disponibles, et réservez-en un." />
+</head>
+
+<body>
+    <section> <!-- 1 - Bienvenue -->
+        <header>
+            <!-- Logo FontAwesome + titre header -->
+            <img src="images/logo.gif" alt="Location de Vélo'V à Lyon" />
+        </header>
+
+        <h1 id="welcomeText">RÉSERVER VOTRE VELO'V À LYON</h1>
+    </section> <!-- fin Bienvenue -->
+
+    <section> <!-- 2 - Comment l'utiliser -->
+        <header>
+            <h1>Comment l'utiliser ?</h1>
+        </header>
+
+        <!-- Explication fonctionnement : slider -->
+        <div id="diaporama">
+            <button id="bouttonGauche"><span class="chevron left"></span></button> <!-- Bouton de navigation droite -->
+
+            <!-- caroussel -->
+            <div id="caroussel">
+                <!-- 1ére image -->
+                <figure class="item">
+                    <img src="images/carte.png">
+                        <figcaption>
+                            1 - Choisissez votre station sur la carte
+                        </figcaption>
+                </figure> <!-- fin image 1 -->
+
+                <!-- 2éme image -->
+                <figure class="item">
+                    <img src="images/etatStation.png">
+
+                        <figcaption>
+                            2 - Vérifier l'état de la station ainsi que le nombre de vélos disponibles et cliquez sur le bouton de réservation
+                        </figcaption>
+                </figure> <!-- fin image 2 -->
+
+                <!-- 3éme image -->
+                <figure class="item">
+                    <img src="images/inscrireSignature.png">
+                        <figcaption>
+                            3 - Inscrivez votre signature dans le cadre en dessous, puis "Valider"
+                        </figcaption>
+                </figure> <!-- fin image 3 -->
+
+                <!-- 4éme image -->
+                <figure class="item">
+                    <img src="images/reservationValider.png">
+                        <figcaption>
+                            4 - Votre réservation est prise en compte immédiatement et pour une durée de 20 minutes
+                        </figcaption>
+                </figure> <!-- fin image 4 -->
+
+                <!-- 5éme image -->
+                <figure class="item">
+                    <img src="images/voyageVelib.jpg">
+                        <figcaption>
+                            5 - Le site de location de Vélo'V de la ville de Lyon vous souhaite une excellente balade
+                        </figcaption>
+                </figure> <!-- fin image  -->
+            </div> <!-- fin caroussel -->
+
+                <button id="bouttonDroit"><span class="chevron right"></span></button> <!-- Bouton de navigation gauche -->
+        </div> <!-- fin Diaporama -->
+    </section> <!-- fin Comment l'utiliser  -->
+
+    <section> <!-- 3 - Location de Vélib -->
+        <div id="header">
+            <img class="header" src="images/favico.ico" alt="Vélo'V" />
+            <h1 class="header">Louer votre Vélo'V</h1>
+        </div>
+
+        <article>
+            <div id="carte"></div> <!-- carte Google Maps -->
+                <div id="infoStation"> <!-- Cadre informations sur la station sélectionnée -->
+                    <h1>Informations sur la station :</h1>
+                        <!-- Informations sur la station sélectionnée -->
+                        <ul id="listeInfo">
+                            <li>Nom : <span id="nomStation"> <!-- Nom inséré en Javascript --> </span></li>
+                            <li>Etat : <span id="etatStation"> <!-- État inséré en Javascript --> </span></li>
+                            <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                            <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                        </ul>
+                        <!-- fin Informations sur la station sélectionnée -->
+                        <div id="streetView"></div>
+                            <p id="bouttonReservation"><button>Réserver</button></p> <!-- Bouton de réservation -->
+                            <p id="messageErreur" class="message">La réservation est impossible à cette station</p> <!-- Message d'erreur en cas de réservation impossible -->
+                </div> <!-- fin cadre informations sur la station sélectionnée -->
+        </article>
+
+            <!-- Cadre signature -->
+            <div id="containerCanvas">
+                <p>Vous étes sur le point de réserver un vélo à la station : <strong> <!-- Nom de la station inséré en Javascript --> </strong></p>
+                <canvas id="signature" width="380" height="200"></canvas> <!-- Canvas -->
+                <!-- Bouton du canvas -->
+                <div id="boutonCanvas">
+                    <p><button id="boutonValider">Valider</button></p> <!-- Bouton Valider -->
+                    <p><button id="boutonEffacer">Effacer</button></p> <!-- Bouton Effacer -->
+                </div>
+            </div> <!-- fin cadre signature -->
+    </section> <!-- fin Location de Vélib -->
+
+        <!-- Message affiché lors d'une réservation -->
+        <div id="messageConfirmationLocation" class="message">
+            Votre réservation est bien enregistrer
+        </div> <!-- /Message affiché lors d'une réservation -->
+        <!-- Message affiché lors de l'annulation d'une réservation -->
+        <div id="annulationReservation" class="message">
+            Réservation annuler
+        </div> <!-- /Message affiché lors de l'annulation d'une réservation -->
+
+    <section id="sectionLocation"> <!-- 4 - Message de location -->
+        <header>
+            <h1>Location en cours</h1>
+        </header>
+
+            <!-- Message affiché à la fin de la réservation -->
+            <div id="messageFinLocation">
+                Votre réservation à expirer !
+            </div>
+
+            <!-- Message affiché durant une réservation -->
+            <div id="messageLocation">
+                <p>Vous venez de réserver 1 vélo à la station : <strong> <!-- Nom de la station inséré en Javascript --> </strong><br>
+                Votre réservation expirera dans : <br></p>
+
+                <div id="compteur"></div> <!-- Div du compte à rebours -->
+                    <p><button id="annulation">Annuler la réservation</button></p> <!-- Bouton pour l'annulation de la réservation -->
+            </div> <!-- fin message affiché durant une réservation -->
+
+    </section> <!-- fin Message de location -->
+
+    <footer> <!-- Pied de page -->
+        <h6>© HGTProduction</h6>
+    </footer> <!-- end pied de page -->
+
+    <!-- Fichiers JavaScript -->
+    <script src="js/diaporama.js"></script> <!-- Diaporama -->
+    <script src="js/maps.js"></script> <!-- Carte Maps location velib -->
+    <script src="js/markerclusterer.js"></script> <!-- Fichier pour markerClusterer -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuU5RQy__LmfyR4Q77dkP6JQ-MeCAPdSY&callback=Maps.initMap" async defer></script> <!-- Script d'affichage de la carte -->
+    <script src="js/canvas.js"></script> <!-- Canvas -->
+    <script src="js/reservation.js"></script> <!-- Réservation -->
+    <script src="js/contrat.js"></script> <!-- Contrat de location -->
+</body>
+
+</html>
